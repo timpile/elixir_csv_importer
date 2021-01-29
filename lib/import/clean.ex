@@ -3,8 +3,6 @@ defmodule EmployeeManagement.Import.Clean do
   Documentation for EmployeeManagement.Import.Clean.
   """
 
-  alias EmployeeManagement.Import.CSV
-
   def dedup([headers | rows], :email) do
     [headers | dedup(rows, :email, headers: false)]
   end

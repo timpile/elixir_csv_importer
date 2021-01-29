@@ -1,21 +1,42 @@
-# EmployeeManagement
+# Elixir CSV Importer
+> For Employee Management Data
 
-**TODO: Add description**
+## Usage
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `employee_management` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:employee_management, "~> 0.1.0"}
-  ]
-end
+Clone the repo.
+```zsh
+$ git clone https://github.com/timpile/elixir_csv_importer.git
+$ cd elixir_csv_importer/
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/employee_management](https://hexdocs.pm/employee_management).
+Run tests.
+```zsh
+$ mix test
+```
 
+Start an interactive console.
+```zsh
+$ iex -S mix
+```
+
+Your CSV file should look something like this, with the first row containing headers.
+```csv
+FirstName,LastName,Email,Phone
+Luke,Skywalker,luke.skywalker@example.com,206-111-1111
+Leia,Skywalker,leia.skywalker@example.com,206-222-2222
+Han,Solo,han.solo@example.com,206-333-3333
+```
+
+Import and deduplicate a CSV file.
+```elixir
+iex> import_file = "employee_data.csv"
+iex> import_path = ["test", "fixtures"]
+iex> alias EmployeeManagement.Import.CSV
+iex> csv = CSV.new(import_file, import_path)
+iex> EmployeeManagement.import_csv(csv, :email)
+"output/employee_data.csv"
+iex> EmployeeManagement.import_csv(csv, :phone)
+"output/employee_data.csv"
+iex> EmployeeManagement.import_csv(csv, :email_or_phone)
+"output/employee_data.csv"
+```
