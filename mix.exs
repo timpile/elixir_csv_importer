@@ -1,9 +1,9 @@
-defmodule EmployeeImport.MixProject do
+defmodule EmployeeManagement.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :employee_import,
+      app: :employee_management,
       version: "0.1.0",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
